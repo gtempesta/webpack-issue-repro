@@ -17,7 +17,7 @@ Since the second one is the oldest, the end result is that the `watch` command i
 1. Clone the repository
 2. Run `npm install` to install the dependencies
 3. Run `npm run watch` to start watching for changes
-4. Look for the `runtime-app` chunk in the `asset-manifest.json` file and in the `app` chunk: they should have the same hash
+4. Look for the `runtime-app` chunk in the `asset-manifest.json` file and in the `app` chunk (both in the public folder): they should have the same hash
 5. Make a change to the code in `app.js` and save it
 6. The issue is still not there
 7. Now make a change to the `design-area.js` file and save it
