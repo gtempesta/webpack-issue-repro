@@ -1,12 +1,10 @@
 async function runProcess() {
-  const { default: remoteMountMethod } = await import(
-    'remote/mountMyDesignArea'
-  );
   // const { default: remoteMountMethod } = await import(
-  //   'remote_bucket/mountMyDesignArea'
+  //   'remote/mountMyDesignArea'
   // );
-
-  console.log('test check check');
+  const { default: remoteMountMethod } = await import(
+    'remote_bucket/mountMyDesignArea'
+  );
 
   const rootElement = document.getElementById('react-root');
   const accessToken = window.anonToken;

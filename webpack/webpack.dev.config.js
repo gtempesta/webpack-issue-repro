@@ -86,9 +86,9 @@ const config = {
       library: { type: 'module' },
       filename: 'remoteEntry.js',
       remotes: {
-        // remote_bucket:
-        //   'https://mda.orion.net/design-area/review/master/assets/remoteEntry.js',
-        remote: 'http://localhost:3001/assets/remoteEntry.js',
+        remote_bucket:
+          'https://mda.orion.net/design-area/review/master/assets/remoteEntry.js',
+        // remote: 'http://localhost:3001/assets/remoteEntry.js',
       },
     }),
   ],
