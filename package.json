@@ -13,6 +13,7 @@
         "node-notifier": "^10.0.1",
         "prettier": "^3.5.3",
         "webpack": "^5.99.5",
+        "webpack-assets-manifest": "^6.0.2",
         "webpack-cli": "^6.0.1",
         "webpack-manifest-plugin": "^5.0.0",
         "webpack-notifier": "^1.15.0"
