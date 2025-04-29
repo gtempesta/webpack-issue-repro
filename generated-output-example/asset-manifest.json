@@ -1,0 +1,11 @@
+{
+  "files": {
+    "app.js": "/js/app.51cd46ce3502605c797c.js",
+    "runtime-app.js": "/js/runtime-app.d0415bae809a613ce32c.js",
+    "js/resources_js_chunks_design-area_js.js": "/js/resources_js_chunks_design-area_js.6572e66ecc4cdcf33f12.js"
+  },
+  "entrypoints": [
+    "js/runtime-app.d0415bae809a613ce32c.js",
+    "js/app.51cd46ce3502605c797c.js"
+  ]
+}
