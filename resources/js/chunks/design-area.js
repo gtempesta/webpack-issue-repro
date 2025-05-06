@@ -1,10 +1,12 @@
 async function runProcess() {
-  // const { default: remoteMountMethod } = await import(
-  //   'remote/remoteMountMethod'
-  // );
-  const { default: remoteMountMethod } = await import(
-    'remote_bucket/remoteMountMethod'
+  const { default: designAreaModule } = await import(
+    'remote/mountMyDesignArea'
   );
+  // const { default: designAreaModule } = await import('remote_bucket/mountMyDesignArea');
+  // extract mount method and eventBus from the remote module
+  const { default: remoteMountMethod } = designAreaModule;
+
+  console.log('xxx 23');
 
   const rootElement = document.getElementById('react-root');
   const accessToken = window.anonToken;

@@ -43,7 +43,7 @@ const config = {
                 },
               ],
             ],
-            plugins: [['@babel/plugin-transform-runtime']],
+            // plugins: [['@babel/plugin-transform-runtime']], // this one??
           },
         },
       },
@@ -123,21 +123,21 @@ const config = {
       alwaysNotify: true,
     }),
     new ModuleFederationPlugin({
-      runtime: 'test-runtime',
+      runtime: false,
       name: 'host',
       library: { type: 'module' },
       filename: 'remoteEntry.js',
       remotes: {
-        remote_bucket: 'https://mda.orion.net/design-area/remoteEntry.js',
-        // remote: 'http://localhost:3001/assets/remoteEntry.js',
+        // remote_bucket: 'https://mda.orion.net/design-area/remoteEntry.js',
+        remote: 'http://localhost:3001/assets/remoteEntry.js',
       },
     }),
     new CleanWebpackPlugin(),
   ],
   output: {
     path: output,
-    filename: 'js/[name].[chunkhash].js',
-    chunkFilename: 'js/[name].[chunkhash].js',
+    filename: 'js/[name].[contenthash].js',
+    chunkFilename: 'js/[name].[contenthash].js',
     publicPath: '/',
     environment: {
       arrowFunction: true,
