@@ -9,7 +9,7 @@ const output = path.resolve(__dirname, '../public/output/');
 
 const config = {
   mode: 'development',
-  devtool: 'inline-source-map',
+  // devtool: 'inline-source-map',
   entry: {
     app: `${sources}/js/app.js`,
   },
@@ -56,7 +56,10 @@ const config = {
     runtimeChunk: {
       name: entrypoint => `runtime-${entrypoint.name}`,
     },
+    chunkIds: 'deterministic',
+    realContentHash: true,
   },
+  cache: false,
   experiments: {
     outputModule: true,
   },
