@@ -1,13 +1,16 @@
 const path = require('path');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
-const { ModuleFederationPlugin } = require('webpack').container;
+// const { ModuleFederationPlugin } = require('webpack').container;
+const {
+  ModuleFederationPlugin,
+} = require('@module-federation/enhanced/webpack');
 const sources = path.resolve(__dirname, '../resources/');
-const output = path.resolve(__dirname, '../public/');
+const output = path.resolve(__dirname, '../public/output/');
 
 const config = {
   mode: 'development',
-  devtool: 'inline-source-map',
+  // devtool: 'inline-source-map',
   entry: {
     app: `${sources}/js/app.js`,
   },
@@ -19,7 +22,7 @@ const config = {
         use: {
           loader: 'babel-loader',
           options: {
-            cacheDirectory: true,
+            // cacheDirectory: true,
             presets: [
               [
                 '@babel/preset-env',
@@ -41,7 +44,7 @@ const config = {
                 },
               ],
             ],
-            plugins: [['@babel/plugin-transform-runtime']],
+            // plugins: [['@babel/plugin-transform-runtime']],
           },
         },
       },
@@ -54,13 +57,14 @@ const config = {
     runtimeChunk: {
       name: entrypoint => `runtime-${entrypoint.name}`,
     },
+    chunkIds: 'deterministic',
     // by default it's only true in production
     // forced to true to avoid an issue with module federation
     realContentHash: true,
   },
   // by default it's only false in production
   // forced to true to avoid an issue with module federation
-  cache: false,
+  // cache: false,
   experiments: {
     outputModule: true,
   },
@@ -88,19 +92,20 @@ const config = {
       alwaysNotify: true,
     }),
     new ModuleFederationPlugin({
+      runtime: false,
       name: 'host',
       library: { type: 'module' },
       filename: 'remoteEntry.js',
       remotes: {
-        remote_bucket: 'https://mda.orion.net/design-area/remoteEntry.js',
-        // remote: 'http://localhost:3001/assets/remoteEntry.js',
+        // remote_bucket: 'https://mda.orion.net/design-area/remoteEntry.js',
+        remote: 'http://localhost:3001/assets/remoteEntry.js',
       },
     }),
   ],
   output: {
     path: output,
-    filename: 'js/[name].[chunkhash].js',
-    chunkFilename: 'js/[name].[chunkhash].js',
+    filename: 'js/[name].[contenthash].js',
+    chunkFilename: 'js/[name].[contenthash].js',
     publicPath: '/',
     environment: {
       arrowFunction: true,
@@ -112,7 +117,7 @@ const config = {
       module: true,
     },
   },
-  target: 'web',
+  target: 'es2020',
 };
 
 module.exports = config;
