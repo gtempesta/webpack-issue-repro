@@ -61,6 +61,18 @@ const config = {
   // by default it's only false in production
   // forced to true to avoid an issue with module federation
   cache: false,
+  // by default it's only false in production
+  // forced to true to avoid an issue with module federation
+  // cache: {
+  //   type: 'filesystem',
+  //   allowCollectingMemory: true,
+  //   memoryCacheUnaffected: true,
+  //   buildDependencies: {
+  //     // This makes all dependencies of this file - build dependencies
+  //     config: [__filename],
+  //     // By default webpack and loaders are build dependencies
+  //   },
+  // },
   experiments: {
     outputModule: true,
   },
