@@ -59,7 +59,7 @@ const config = {
     chunkIds: 'deterministic',
     realContentHash: true,
   },
-  cache: false,
+  // cache: false,
   experiments: {
     outputModule: true,
   },
