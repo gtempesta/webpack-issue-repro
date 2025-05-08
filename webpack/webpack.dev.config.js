@@ -19,7 +19,7 @@ const config = {
         use: {
           loader: 'babel-loader',
           options: {
-            // cacheDirectory: true,
+            cacheDirectory: true,
             presets: [
               [
                 '@babel/preset-env',
@@ -41,7 +41,7 @@ const config = {
                 },
               ],
             ],
-            // plugins: [['@babel/plugin-transform-runtime']],
+            plugins: [['@babel/plugin-transform-runtime']],
           },
         },
       },
@@ -54,7 +54,6 @@ const config = {
     runtimeChunk: {
       name: entrypoint => `runtime-${entrypoint.name}`,
     },
-    chunkIds: 'deterministic',
     // by default it's only true in production
     // forced to true to avoid an issue with module federation
     realContentHash: true,
@@ -89,7 +88,6 @@ const config = {
       alwaysNotify: true,
     }),
     new ModuleFederationPlugin({
-      runtime: false,
       name: 'host',
       library: { type: 'module' },
       filename: 'remoteEntry.js',
