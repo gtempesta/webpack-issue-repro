@@ -1,16 +1,13 @@
 const path = require('path');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
-// const { ModuleFederationPlugin } = require('webpack').container;
-const {
-  ModuleFederationPlugin,
-} = require('@module-federation/enhanced/webpack');
+const { ModuleFederationPlugin } = require('webpack').container;
 const sources = path.resolve(__dirname, '../resources/');
-const output = path.resolve(__dirname, '../public/output/');
+const output = path.resolve(__dirname, '../public/');
 
 const config = {
   mode: 'development',
-  // devtool: 'inline-source-map',
+  devtool: 'inline-source-map',
   entry: {
     app: `${sources}/js/app.js`,
   },
