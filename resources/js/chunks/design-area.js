@@ -13,6 +13,8 @@ async function runProcess() {
     customerId,
     token: accessToken,
   });
+  console.log("Design area module updated at", new Date().toISOString());
+
 }
 
 runProcess();
