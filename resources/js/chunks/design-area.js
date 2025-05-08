@@ -6,8 +6,6 @@ async function runProcess() {
   // extract mount method and eventBus from the remote module
   const { default: remoteMountMethod } = designAreaModule;
 
-  console.log('xxeL kdee eex 23');
-
   const rootElement = document.getElementById('react-root');
   const accessToken = window.anonToken;
   const customerId = '12345';
