@@ -54,7 +54,13 @@ const config = {
     runtimeChunk: {
       name: entrypoint => `runtime-${entrypoint.name}`,
     },
+    // by default it's only true in production
+    // forced to true to avoid an issue with module federation
+    realContentHash: true,
   },
+  // by default it's only false in production
+  // forced to true to avoid an issue with module federation
+  cache: false,
   experiments: {
     outputModule: true,
   },
