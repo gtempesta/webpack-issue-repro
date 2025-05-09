@@ -1,11 +1,9 @@
 const path = require('path');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
-const { WebpackAssetsManifest } = require('webpack-assets-manifest');
 const WebpackNotifierPlugin = require('webpack-notifier');
 const { ModuleFederationPlugin } = require('webpack').container;
 const sources = path.resolve(__dirname, '../resources/');
 const output = path.resolve(__dirname, '../public/');
-const fs = require('fs');
 
 const config = {
   mode: 'development',
@@ -82,45 +80,6 @@ const config = {
           files: manifestFiles,
           entrypoints: entrypointFiles,
         };
-      },
-    }),
-    new WebpackAssetsManifest({
-      // Options go here
-      output: 'new-asset-manifest.json',
-      publicPath: '/',
-      writeToDisk: true, // Optional, if you want the file written to disk
-      customize(entry, original, manifest, asset) {
-        // Default behavior — we return the entry unmodified
-        return entry;
-      },
-      done(manifest, stats) {
-        return new Promise((resolve, reject) => {
-          try {
-            const entrypoints = stats.compilation.entrypoints;
-            const appEntrypoint = entrypoints.get('app');
-
-            const files =
-              appEntrypoint ?
-                appEntrypoint.getFiles().filter(file => !file.endsWith('.map'))
-              : [];
-
-            const current = manifest.toJSON();
-            const newManifest = {
-              files: current,
-              entrypoints: files,
-            };
-
-            const fs = require('fs');
-            const path = require('path');
-            const outputPath = path.resolve(output, manifest.options.output);
-
-            fs.writeFileSync(outputPath, JSON.stringify(newManifest, null, 2));
-
-            resolve(); // Must resolve to satisfy tapPromise
-          } catch (err) {
-            reject(err); // If anything fails
-          }
-        });
       },
     }),
     new WebpackNotifierPlugin({
