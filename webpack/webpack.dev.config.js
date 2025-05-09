@@ -56,7 +56,13 @@ const config = {
     runtimeChunk: {
       name: entrypoint => `runtime-${entrypoint.name}`,
     },
+    // by default it's only true in production
+    // forced to true to avoid an issue with module federation
+    // realContentHash: true,
   },
+  // by default it's only false in production
+  // forced to true to avoid an issue with module federation
+  // cache: false,
   experiments: {
     outputModule: true,
   },
@@ -127,15 +133,15 @@ const config = {
       library: { type: 'module' },
       filename: 'remoteEntry.js',
       remotes: {
-        remote_bucket: 'https://mda.orion.net/design-area/remoteEntry.js',
-        // remote: 'http://localhost:3001/assets/remoteEntry.js',
+        // remote_bucket: 'https://mda.orion.net/design-area/remoteEntry.js',
+        remote: 'http://localhost:3001/assets/remoteEntry.js',
       },
     }),
   ],
   output: {
     path: output,
-    filename: 'js/[name].[chunkhash].js',
-    chunkFilename: 'js/[name].[chunkhash].js',
+    filename: 'js/[name].[contenthash].js',
+    chunkFilename: 'js/[name].[contenthash].js',
     publicPath: '/',
     environment: {
       arrowFunction: true,
@@ -147,7 +153,7 @@ const config = {
       module: true,
     },
   },
-  target: 'web',
+  target: 'es2020',
 };
 
 module.exports = config;
