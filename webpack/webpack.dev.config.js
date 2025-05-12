@@ -90,9 +90,6 @@ const commonConfig = {
       },
     ],
   },
-  experiments: {
-    outputModule: true,
-  },
 };
 
 const mainAppConfig = merge([
@@ -111,11 +108,23 @@ const mainAppConfig = merge([
         name: entrypoint => `runtime-${entrypoint.name}`,
       },
     },
+    experiments: {
+      outputModule: true,
+    },
     plugins: [
       new WebpackNotifierPlugin({
         title: 'Modern JS Webpack',
         excludeWarnings: true,
         alwaysNotify: true,
+      }),
+      new ModuleFederationPlugin({
+        name: 'host',
+        library: { type: 'module' },
+        filename: 'remoteEntry.js',
+        remotes: {
+          // remote_bucket: 'https://mda.orion.net/design-area/remoteEntry.js',
+          remote: 'http://localhost:3001/assets/remoteEntry.js',
+        },
       }),
     ],
   },
@@ -128,6 +137,9 @@ const microFrontendConfig = merge([
   {
     entry: {
       [microFrontendName]: `${sources}/js/micro-frontend.js`,
+    },
+    experiments: {
+      outputModule: true,
     },
     plugins: [
       new ModuleFederationPlugin({
@@ -143,4 +155,6 @@ const microFrontendConfig = merge([
   },
 ]);
 
-module.exports = [mainAppConfig, microFrontendConfig];
+// module.exports = [mainAppConfig, microFrontendConfig];
+
+module.exports = mainAppConfig;
