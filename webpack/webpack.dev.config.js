@@ -46,10 +46,6 @@ const outputConfiguration = folderName => ({
   },
 });
 
-const microFrontendName = 'micro-frontend';
-const microFrontendFolder = 'js-mf';
-const microFrontendManifestName = 'asset-manifest-mf.json';
-
 const commonConfig = {
   mode: 'development',
   devtool: 'inline-source-map',
@@ -123,11 +119,11 @@ const mainAppConfig = merge([
 
 const microFrontendConfig = merge([
   commonConfig,
-  manifestConfiguration(microFrontendManifestName, microFrontendName),
-  outputConfiguration(microFrontendFolder),
+  manifestConfiguration('asset-manifest-mf.json', 'micro-frontend'),
+  outputConfiguration('js-mf'),
   {
     entry: {
-      [microFrontendName]: `${sources}/js/micro-frontend.js`,
+      'micro-frontend': `${sources}/js/micro-frontend.js`,
     },
     plugins: [
       new ModuleFederationPlugin({
